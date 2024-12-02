@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Conis</title>
+    <style>
+        body {
+            margin: 0;
+            overflow: hidden;
+            background-image: url('./桌子背景.png'); /* 替换为你的背景图片链接 */
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            position: relative;
+        }
+
+        .image {
+            position: absolute;
+            width: 150px;
+            height: 150px;
+            cursor: pointer;
+            user-select: none;
+        }
+
+        .top-right-button {
+            position: absolute;
+            top: 175px; /* 下移 180px（原始位置20px + 180px） */
+            right: 740px; /* 左移 760px（原始位置20px + 760px） */
+            width: 50px;
+            height: 50px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-color: rgba(211, 169, 235, 0.899); /* 半透明白色背景 */
+            border-radius: 50%; /* 圆形按钮 */
+            cursor: pointer;
+            box-shadow: 0 4px 8px #00000010; /* 添加阴影 */
+            transition: transform 0.2s ease, background-color 0.2s ease;
+        }
+
+        .top-right-button:hover {
+            transform: scale(1.1); /* 鼠标悬停时放大 */
+            background-color: rgba(255, 255, 255, 1); /* 变为不透明白色 */
+        }
+
+        .arrow {
+            width: 0;
+            height: 0;
+            border-top: 10px solid transparent;
+            border-bottom: 10px solid transparent;
+            border-left: 15px solid hsl(59, 80%, 77%); /* 白色箭头 */
+        }
+    </style>
+</head>
+<body>
+    <!-- 调整位置的跳转按钮 -->
+    <div class="top-right-button" onclick="window.location.href='5.瓶子.html';">
+        <div class="arrow"></div>
+    </div>
+
+    <script>
+        const imageSources = [
+            './桌面物品/B1.png',
+            './桌面物品/B2.png',
+            './桌面物品/B3.png',
+            './桌面物品/B4.png',
+            './桌面物品/B5.png',
+            './桌面物品/B6.png',
+            './桌面物品/B7.png',
+            './桌面物品/B8.png',
+            './桌面物品/B9.png',
+            './桌面物品/B10.png',
+            './桌面物品/B12.png',
+            './桌面物品/B13.png',
+            './桌面物品/B15.png',
+            './桌面物品/B16.png',
+            './桌面物品/B17.png',
+            './桌面物品/B19.png',
+            './桌面物品/B20.png',
+            './桌面物品/B21.png',
+            './桌面物品/B23.png',
+            './桌面物品/B24.png',
+        ];
+
+        let selectedImage = null;
+        let zIndexCounter = 1; // z-index 计数器，确保每次点击的图片 z-index 更高
+        let offsetX = 0, offsetY = 0; // 存储鼠标相对于图片的偏移量
+
+        // 创建图片元素
+        imageSources.forEach((src) => {
+            const img = document.createElement('img');
+            img.src = src;
+            img.className = 'image';
+
+            // 随机生成水平位置，垂直位置固定在底部
+            img.style.left = `${Math.random() * (window.innerWidth - 150)}px`;
+            img.style.top = `${window.innerHeight - 150}px`; // 放置在底部
+
+            document.body.appendChild(img);
+
+            // 添加点击选择功能
+            img.addEventListener('click', (event) => {
+                if (selectedImage === img) {
+                    selectedImage = null; // 再次点击取消选择
+                } else {
+                    selectedImage = img; // 选中当前图片
+
+                    // 提升 z-index
+                    zIndexCounter++;
+                    img.style.zIndex = zIndexCounter;
+                }
+            });
+
+            // 监听鼠标按下事件
+            img.addEventListener('mousedown', (event) => {
+                event.preventDefault(); // 防止默认的拖拽行为
+
+                // 记录鼠标按下时的位置，计算偏移量
+                offsetX = event.clientX - img.offsetLeft;
+                offsetY = event.clientY - img.offsetTop;
+
+                // 禁用文本选择，避免拖动时出现不必要的效果
+                document.body.style.userSelect = 'none';
+
+                // 鼠标按下时，设置该图片为选中状态
+                selectedImage = img;
+
+                // 提升 z-index，确保它位于最上层
+                zIndexCounter++;
+                img.style.zIndex = zIndexCounter;
+
+                // 监听鼠标移动事件
+                const onMouseMove = (moveEvent) => {
+                    // 使图片跟随鼠标
+                    img.style.left = `${moveEvent.clientX - offsetX}px`;
+                    img.style.top = `${moveEvent.clientY - offsetY}px`;
+                };
+
+                // 监听鼠标松开事件，停止拖动
+                const onMouseUp = () => {
+                    // 移除鼠标移动和鼠标松开事件监听
+                    document.removeEventListener('mousemove', onMouseMove);
+                    document.removeEventListener('mouseup', onMouseUp);
+                    document.body.style.userSelect = ''; // 恢复文本选择
+                };
+
+                // 添加鼠标移动和鼠标松开事件监听
+                document.addEventListener('mousemove', onMouseMove);
+                document.addEventListener('mouseup', onMouseUp);
+            });
+        });
+    </script>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+

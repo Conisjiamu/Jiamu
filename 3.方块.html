@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Conis</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            height: 100vh;
+            margin: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-color: #f9f9f9;
+        }
+
+        .container {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            background-image: url('背景图.png'); /* 替换成你的背景 PNG 图像 */
+            background-size: cover;
+            background-position: center;
+        }
+
+        .block {
+            position: absolute;
+            width: 10px;
+            height: 10px;
+            background-size: cover;
+            cursor: pointer; /* 添加鼠标样式提示可点击 */
+        }
+
+        #block1 {
+            top: calc(10% + 50px);
+            left: calc(10% + 80px);
+            background-image: url('./方块/方块1.png');
+        }
+
+        #block2 {
+            top: calc(15% + 50px);
+            left: calc(20% + 80px);
+            background-image: url('./方块/方块2.png');
+        }
+
+        #block3 {
+            top: calc(20% + 50px);
+            left: calc(40% + 80px);
+            background-image: url('./方块/方块3.png');
+        }
+
+        #block4 {
+            top: calc(25% + 50px);
+            left: calc(70% + 80px);
+            background-image: url('./方块/方块4.png');
+        }
+
+        #block5 {
+            top: calc(50% + 50px);
+            left: calc(10% + 80px);
+            background-image: url('./方块/方块5.png');
+        }
+
+        #block6 {
+            top: calc(50% + 50px);
+            left: calc(60% + 80px);
+            background-image: url('./方块/方块6.png');
+        }
+
+        #block7 {
+            top: calc(60% + 50px);
+            left: calc(30% + 80px);
+            background-image: url('./方块/方块7.png');
+        }
+
+        #block8 {
+            top: calc(70% + 50px);
+            left: calc(80% + 80px);
+            background-image: url('./方块/方块8.png');
+        }
+
+        #block9 {
+            top: calc(80% + 50px);
+            left: calc(50% + 80px);
+            background-image: url('./方块/方块9.png');
+        }
+
+        /* 图像显示区域 */
+        .show-image {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%) scale(0.7); /* 默认缩小 30% */
+            display: none;
+            z-index: 10;
+            max-width: 80%; /* 图像最大宽度 */
+        }
+
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="block" id="block1"></div>
+        <div class="block" id="block2"></div>
+        <div class="block" id="block3"></div>
+        <div class="block" id="block4"></div>
+        <div class="block" id="block5"></div>
+        <div class="block" id="block6"></div>
+        <div class="block" id="block7"></div>
+        <div class="block" id="block8"></div>
+        <div class="block" id="block9"></div>
+
+        <!-- 显示的图片 -->
+        <img id="showImage" class="show-image" src="" alt="显示图像">
+    </div>
+
+    <script>
+        const blocks = document.querySelectorAll('.block');
+        const showImage = document.getElementById('showImage');
+
+        blocks.forEach((block, index) => {
+            // 鼠标进入时显示对应的图片
+            block.addEventListener('mouseenter', () => {
+                // 设置对应的图片
+                showImage.src = `appear-images/出现${index + 1}.png`;
+
+                // 检查特定图像是否需要额外缩小
+                if (index === 0 || index === 4 || index === 7 || index === 8) {
+                    showImage.style.transform = 'translate(-50%, -50%) scale(0.4)'; // 缩小 30% 额外处理
+                } else if (index === 6) {
+                    showImage.style.transform = 'translate(-50%, -50%) scale(0.25)'; // 出现7.png 再缩小 50%，即缩小 70% 总共
+                } else {
+                    showImage.style.transform = 'translate(-50%, -50%) scale(0.7)'; // 默认缩小 30%
+                }
+
+                showImage.style.display = 'block'; // 显示图片
+            });
+
+            // 鼠标离开时隐藏图片
+            block.addEventListener('mouseleave', () => {
+                showImage.style.display = 'none';
+            });
+
+            // 点击方块跳转到 4.桌子.html
+            block.addEventListener('click', () => {
+                window.location.href = '4.桌子.html'; // 跳转到指定页面
+            });
+        });
+    </script>
+</body>
+</html>
+
+

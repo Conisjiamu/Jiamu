@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Conis</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: "mv boli";
+        }
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            background-image: url('IMG-5760.jpg'); /* 替换为你的背景图片路径 */
+            background-size: cover; /* 确保图片完全覆盖背景 */
+            background-position: center; /* 背景图片居中 */
+            background-repeat: no-repeat; /* 禁止平铺 */
+            overflow: hidden;
+        }
+        .container {
+            position: relative;
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            transform: translateY(-50px); /* 整体向上移动50px */
+        }
+        .container .card {
+            position: absolute;
+            width: 240px;
+            height: 360px;
+            border-radius: 2rem; /* 保留圆角 */
+            background-size: cover; /* 图片完全覆盖 */
+            background-position: center; /* 居中对齐 */
+            background-repeat: no-repeat; /* 禁止平铺 */
+            transform-origin: 50% 100%;
+            filter: none; /* 色相旋转，可移除 */
+            transition: 0.5s;
+        }
+        .containerHover {
+            transform: rotate(calc(var(--i) * 5deg)) translate(calc(var(--i) * 120px), -50px);
+            box-shadow: 0 15px 50px rgba(0, 0, 0, 0.25);
+            color: #0f0f0f !important;
+        }
+        .active {
+            translate: calc(var(--i) * 20px) -50px;
+            z-index: 99;
+        }
+        .notActive {
+            background-color: #333 !important;
+        }
+
+        /* 按钮（白色方块）样式 */
+        .next-page-button {
+            position: absolute;
+            bottom: 100px; /* 距离页面底部 */
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100px; /* 方块宽度 */
+            height: 100px; /* 方块高度 */
+            background-color: white; /* 白色背景 */
+            opacity: 0; /* 初始隐藏 */
+            pointer-events: none; /* 禁用交互 */
+            transition: opacity 1s ease-in-out; /* 缓慢浮现 */
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* 添加阴影效果 */
+        }
+        .next-page-button.visible {
+            opacity: 1; /* 显示 */
+            pointer-events: auto; /* 启用交互 */
+        }
+    </style>
+    <script src="http://libs.baidu.com/jquery/2.1.4/jquery.min.js"></script>
+</head>
+<body>
+    
+
+    <div class="container">
+        <div class="card" style="--i:-4" data-img="./卡牌/卡牌-01.jpg"></div>
+        <div class="card" style="--i:-3" data-img="./卡牌/卡牌-02.jpg"></div>
+        <div class="card" style="--i:-2" data-img="./卡牌/卡牌-03.jpg"></div>
+        <div class="card" style="--i:-1" data-img="./卡牌/卡牌-04.jpg"></div>
+        <div class="card" style="--i:0" data-img="./卡牌/卡牌-05.jpg"></div>
+        <div class="card" style="--i:1" data-img="./卡牌/卡牌-06.jpg"></div>
+        <div class="card" style="--i:2" data-img="./卡牌/卡牌-07.jpg"></div>
+        <div class="card" style="--i:3" data-img="./卡牌/卡牌-08.jpg"></div>
+        <div class="card" style="--i:4" data-img="./卡牌/卡牌-09.jpg"></div>
+    </div>
+    <!-- 跳转按钮（白色方块） -->
+    <div class="next-page-button" onclick="window.location.href='2.信封.html'"></div>
+    <script>
+        $(document).ready(function () {
+            let buttonShown = false; // 按钮是否已经显示的标志
+
+            $(".card").each(function () {
+                const imgSrc = $(this).attr("data-img"); // 获取图片路径
+                $(this).css("background-image", `url(${imgSrc})`); // 设置背景图片
+            });
+
+            $(".container").mouseenter(function () {
+                $(this).children(".card").addClass("containerHover");
+            }).mouseleave(function () {});
+
+            $(".card").click(function () {
+                $(this).toggleClass("notActive", $(this).hasClass("active"))
+                       .toggleClass("active")
+                       .siblings(".card:not(.active)")
+                       .addClass("notActive");
+
+                if (!buttonShown) {
+                    $(".next-page-button").addClass("visible"); // 显示按钮
+                    buttonShown = true; // 标记按钮已显示
+                }
+            });
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="Zh-CN">
+<head>
+    <meta charset="utf-8">
+    <title>Conis</title>
+    <style>
+        body, div, h1, h2, form, fieldset, input, textarea, footer, p {
+            margin: 0;
+            padding: 0;
+            border: 0;
+            outline: none;
+        }
+        body {
+            background-image: url('信封背景.PNG');
+            background-size: cover;  /* 使图片覆盖整个背景 */
+            background-position: center center;  /* 图片居中 */
+            background-repeat: no-repeat;  /* 防止图片重复 */
+            height: 100vh;  /* 使背景覆盖整个视口 */
+            margin: 0;  /* 去除默认的页面外边距 */
+        }
+        p {
+            font-family: Snell Roundhand;
+            font-size: 24px;
+            color: hsl(277, 13%, 67%);
+        }
+        #wrap {
+            width: 530px;
+            margin: 20px auto 0;
+            height: 1000px;
+        }
+        h1 {
+            margin-bottom: 20px;
+            text-align: center;
+            font-size: 35px;
+            font-family: tahoma;
+            color: black;
+        }
+        #form-wrap {
+            overflow: hidden;
+            height: 447px;
+            position: relative;
+            top: 0px;
+            transition: all 1s ease-in-out .3s;
+        }
+        #form-wrap:before, #form-wrap:after {
+            content: "";
+            position: absolute;
+            left: 0px;
+            width: 100%;
+            background-size: contain;
+            background-repeat: no-repeat;
+        }
+        #form-wrap:before {
+            bottom: 128px;
+            height: 317px;
+            background-image: url('../img/before.png');
+        }
+        #form-wrap:after {
+            bottom: 0px;
+            height: 259px;
+            background-image: url('../img/after.png');
+        }
+        #form-wrap.hide:after,
+        #form-wrap.hide:before {
+            display: none;
+        }
+        #form-wrap:hover {
+            height: 777px;
+            top: -200px;
+        }
+        form {
+            background: url('./img/letter_bg.png') no-repeat center;
+            background-size: auto; /* 保持图片的原始大小 */
+            background-position: center;
+            position: relative;
+            top: 200px;
+            overflow: hidden;
+            height: 200px;
+            width: 400px;
+            margin: 0px auto;
+            padding: 20px;
+            border: 1px solid white;
+            border-right: 3px;
+            transition: all 1s ease-in-out .3s;
+            cursor: pointer; /* 鼠标悬停显示手型光标 */
+        }
+        #form-wrap:hover form {
+            height: 530px;
+        }
+        lable {
+            margin: 11px 20px 0 0;
+            font-size: 15px;
+            color: gray;
+            text-transform: uppercase;
+        }
+        input[type=text], textarea {
+            font: 14px normal uppercase, arial, serif;
+            color: dimgray;
+            background: none;
+            width: 380px;
+            height: 37px;
+            padding: 0px 10px;
+            margin: 0 0 10px 0;
+            border: 1px solid #BDBDBD;
+            border-radius: 5px;
+        }
+        textarea {
+            height: 80px;
+            padding-top: 14px;
+        }
+        textarea:focus,
+        input[type=text]:focus {
+            background: url('../img/letter_bg.png');
+        }
+        #form-wrap input[type=submit] {
+            position: relative;
+            font-family: tahoma;
+            font-size: 24px;
+            color: gray;
+            width: 300px;
+            text-align: center;
+            opacity: 0;
+            background: none;
+            cursor: pointer;
+            border-radius: 3px;
+            transition: opacity 0.7s ease-in-out 0s;
+        }
+        #form-wrap:hover input[type=submit] {
+            z-index: 1;
+            opacity: 1;
+            transition: opacity 0.5s ease-in-out 1.3s;
+        }
+    </style>
+</head>
+<body>
+    <div id="wrap">
+        <br><br><br>
+        <div id="form-wrap">
+            <form onclick="location.href='3.方块.html';">
+                <p> At the edge of time,<br>  
+                    invisible sparks flicker,  <br> 
+                    weaving into a secret river, <br>  
+                    silent,  
+                    the future gently ripples.<br> 
+                    
+                    No sound,  <br> 
+                    only a warm shadow,  <br> 
+                    it blooms in the blank,  <br> 
+                    stretching forward,<br>  
+                    into the endless unknown.<br> 
+                    
+                    Fragments fall, <br>  
+                    light as dreams, <br>  
+                    and in some unseen moment, <br>  
+                    all the silent desires will softly be embraced.</p>
+                
+            </form>
+        </div>
+    </div>
+</body>
+</html>
